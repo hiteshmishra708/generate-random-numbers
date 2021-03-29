@@ -1,7 +1,43 @@
-function randomNoGenerator(min, max) {
-  if(typeof(max) !== 'number' && typeof(min) !== 'number') {
-    min = 0;  max = 1;
-  }
- return (Math.random() * (max-min)) + min;
+var crypto = require('crypto')
+
+function isNum(num) {
+  return typeof num === 'number'
 }
-module.exports = randomNoGenerator;
+
+function randomNumber(max, min) {
+  min = min || 0
+  
+  if(!isNum(max)) {
+    return 0
+  }
+
+  if(min >= max) {
+    return max
+  }
+  
+  var range = (max - min) + 1
+    , bytes = 1
+    
+  while(Math.pow(2, bytes * 8) <= range) {
+    bytes++
+  }
+  
+  var cutoff = Math.floor(Math.pow(2, bytes * 8) / range) * range - 1
+  , buf    = null
+    , num    = cutoff + 1
+
+    while(num > cutoff) {
+    try {
+      buf = crypto.randomBytes(bytes)
+    } catch(err) {
+      buf = crypto.pseudoRandomBytes(bytes)
+    }
+    num = 0
+    for(var i = 0; i < bytes; i++) {
+      num += buf.readUInt8(i) * Math.pow(2, 8 * (bytes - i - 1))
+    }
+  }
+  return (num % range) + min
+}
+
+module.exports = randomNumber;

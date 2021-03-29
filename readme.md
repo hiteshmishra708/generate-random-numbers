@@ -1,5 +1,12 @@
 # Generate Random Numbers
 
+## Usages
+```
+const randomNumber = require('generate-random-numbers')
+console.log(randomNumber(1000))    // random integer between 0 and 1000
+console.log(randomNumber(500, 100)) // random integer between 100 and 500
+```
+
 ## Create a test directory
 ```
 mkdir test-random-number 
