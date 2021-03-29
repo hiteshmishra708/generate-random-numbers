@@ -1,11 +1,15 @@
 {
   "name": "generate-random-numbers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generate random numbers",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Hitesh Mishra",
+  "repository" : { 
+    "type" : "git",
+    "url" : "https://github.com/hiteshmishra708/generate-random-numbers.git"
+  },
   "license": "ISC"
 }
